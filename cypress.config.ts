@@ -8,5 +8,6 @@ export default defineConfig({
     specPattern: "cypress/integration/**/*.spec.ts",
     supportFile: "cypress/support/index.ts",
     video: false,
+    allowCypressEnv: false,
   },
 });

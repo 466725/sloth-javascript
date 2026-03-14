@@ -1,6 +1,11 @@
+import { AmazonHomePage } from "./AmazonHomePage";
+
 export class AmazonRegisterPage {
   visit() {
-    cy.visit("/ap/register");
+    const home = new AmazonHomePage();
+    home.visit();
+    cy.get("#nav-link-accountList").click();
+    cy.get("a[href*='/ap/register']").click();
   }
 
   getNameField() {

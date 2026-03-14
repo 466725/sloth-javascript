@@ -1,10 +1,15 @@
+import { AmazonHomePage } from "./AmazonHomePage";
+
 export class AmazonLoginPage {
   visit() {
-    cy.visit("/ap/signin");
+    const home = new AmazonHomePage();
+    home.visit();
+    cy.get("#nav-link-accountList").click();
+    cy.contains("Sign in").click();
   }
 
   getEmailField() {
-    return cy.get("#ap_email");
+    return cy.get("input[type='email']");
   }
 
   getPasswordField() {

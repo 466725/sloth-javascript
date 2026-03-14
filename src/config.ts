@@ -1,5 +1,5 @@
 export function getBaseUrl(): string {
-  return Cypress.env("BASE_URL") || Cypress.config("baseUrl") || "https://www.amazon.com";
+  return Cypress.config("baseUrl") as string;
 }
 
 export const testCredentials = {
