@@ -1,0 +1,14 @@
+{
+  "name": "sloth-javascript",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "cypress:open": "npx cypress open",
+    "cypress:run": "npx cypress run",
+    "test": "npm run cypress:run"
+  },
+  "devDependencies": {
+    "cypress": "^12.17.0",
+    "typescript": "^5.3.0"
+  }
+}
