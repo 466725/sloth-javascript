@@ -6,7 +6,7 @@ export class AmazonLoginPage {
     home.visit();
     cy.get('body').then($body => {
       if ($body.find('#redir-modal').length > 0) {
-        cy.get('#redir-modal').click({force: true});
+        cy.get('#redir-modal').click({ force: true });
       }
     });
     cy.get("#nav-link-accountList").click();

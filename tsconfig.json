@@ -1,16 +1,27 @@
 {
   "compilerOptions": {
     "target": "ES2021",
-    "lib": ["ES2021", "DOM"],
+    "lib": [
+      "ES2021",
+      "DOM"
+    ],
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "types": ["cypress", "node"],
+    "types": [
+      "cypress",
+      "node"
+    ],
     "outDir": "dist"
   },
-  "include": ["cypress/**/*.ts", "src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "cypress/**/*.ts",
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

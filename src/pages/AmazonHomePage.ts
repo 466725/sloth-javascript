@@ -8,7 +8,7 @@ export class AmazonHomePage {
   }
 
   searchFor(product: string) {
-    cy.get("#twotabsearchtextbox").clear({force: true}).type(`${product}{enter}`, {force: true});
+    cy.get("#twotabsearchtextbox").clear({ force: true }).type(`${product}{enter}`, { force: true });
   }
 
   getSearchResults() {
