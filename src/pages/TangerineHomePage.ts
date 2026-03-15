@@ -11,6 +11,7 @@ export class TangerineHomePage {
   }
 
   clickLogin() {
-    cy.contains("Log Me In").click();
+    // Updated to match "Log In" (current) or "Log Me In" (legacy)
+    cy.contains(/Log In|Log Me In/i).click();
   }
 }

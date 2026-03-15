@@ -10,8 +10,7 @@ describe("Tangerine Login Page", () => {
 
   beforeEach(() => {
     home.visit();
-    // Temporary fix: Selector updated from "Log Me In" to "Log In" based on current site text
-    cy.contains("Log In").should("be.visible").click();
+    home.clickLogin();
   });
 
   it("should show an error when logging in with invalid credentials", () => {
@@ -19,8 +18,6 @@ describe("Tangerine Login Page", () => {
       testCredentials.invalidUser.clientId,
       testCredentials.invalidUser.pin
     );
-    // The specific error classes (FeedbackPanel etc) might have changed.
-    // Checking for visible text is more robust.
-    cy.contains(/Invalid|Error|Check your/i).should("be.visible");
+    login.getErrorMessage().should("be.visible");
   });
 });
