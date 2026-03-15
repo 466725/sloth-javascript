@@ -1,6 +1,6 @@
 import { defineConfig } from "cypress";
 
-const baseUrl = process.env.BASE_URL || "https://www.amazon.com";
+const baseUrl = process.env.BASE_URL || "https://www.tangerine.ca/en/personal";
 
 export default defineConfig({
   e2e: {
@@ -9,9 +9,11 @@ export default defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     pageLoadTimeout: 120000,
+    defaultCommandTimeout: 10000,
     specPattern: "cypress/integration/**/*.spec.ts",
     supportFile: "cypress/support/index.ts",
     video: false,
     allowCypressEnv: false,
+    chromeWebSecurity: false,
   },
 });

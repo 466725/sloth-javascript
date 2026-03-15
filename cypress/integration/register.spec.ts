@@ -1,19 +1,14 @@
 /// <reference types="cypress" />
 
-import { AmazonRegisterPage } from "../../src/pages/AmazonRegisterPage";
+import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
 
-describe("Amazon Register New User", () => {
-  const register = new AmazonRegisterPage();
+describe("Tangerine Registration", () => {
+  const home = new TangerineHomePage();
 
-  it("should show the registration form", () => {
-    register.visit();
-    register.getNameField().should("be.visible");
-    register.getEmailField().should("be.visible");
-  });
-
-  it("should validate required fields", () => {
-    register.visit();
-    register.submit();
-    register.getInlineAlerts().should("be.visible");
+  it("should verify the Sign Up page loads", () => {
+    home.visit();
+    cy.contains(/Sign Up|Become a Client/i).click();
+    cy.url().should("include", "sign-up");
+    cy.contains("Become a Client").should("be.visible");
   });
 });

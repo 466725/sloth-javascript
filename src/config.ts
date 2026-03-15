@@ -4,11 +4,11 @@ export function getBaseUrl(): string {
 
 export const testCredentials = {
   user: {
-    email: "test@example.com",
-    password: "Password123",
+    clientId: "12345678",
+    pin: "123456",
   },
   invalidUser: {
-    email: "invalid@example.com",
-    password: "wrongpassword",
+    clientId: "00000000",
+    pin: "000000",
   },
 };

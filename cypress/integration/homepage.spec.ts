@@ -1,20 +1,12 @@
 /// <reference types="cypress" />
 
-import { AmazonHomePage } from "../../src/pages/AmazonHomePage";
+import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
 
-describe("Amazon Homepage", () => {
-  const home = new AmazonHomePage();
+describe("Tangerine Homepage", () => {
+  const home = new TangerineHomePage();
 
-  beforeEach(() => {
+  it("should load the homepage and show the logo", () => {
     home.visit();
-  });
-
-  it("should load the homepage", () => {
     home.getLogo().should("be.visible");
-  });
-
-  it("should be able to search for a product", () => {
-    home.searchFor("cypress");
-    home.getSearchResults().should("be.visible");
   });
 });
