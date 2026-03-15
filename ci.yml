@@ -1,0 +1,26 @@
+name: End-to-End Tests
+
+on:
+  # Trigger when a PR is merged (pushed) to main or master
+  push:
+    branches:
+      - main
+      - master
+  # Trigger nightly at midnight UTC
+  schedule:
+    - cron: '0 0 * * *'
+  # Allow manual triggering from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Install npm dependencies and run Cypress tests
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          browser: chrome
