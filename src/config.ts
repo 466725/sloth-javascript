@@ -7,4 +7,8 @@ export const testCredentials = {
     email: "test@example.com",
     password: "Password123",
   },
+  invalidUser: {
+    email: "invalid@example.com",
+    password: "wrongpassword",
+  },
 };
