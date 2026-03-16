@@ -1,163 +1,271 @@
-# Amazon Automation Framework (TypeScript + Cypress)
+Tangerine Bank UI Test Automation Framework
 
-A demo automation framework that validates key Amazon pages (homepage, login, registration) using **Cypress + TypeScript**.
+Cypress + TypeScript | Page Object Model | CI/CD Ready
 
----
+A maintainable, scalable UI test automation framework built using Cypress and TypeScript to validate key customer-facing pages of the Tangerine Bank website.
 
-## ✅ Quick Start
+This project demonstrates modern test automation architecture and engineering practices used in real-world QA environments.
 
-If you're cloning the repo:
+🎯 Purpose
 
-```bash
-git clone https://github.com/your-username/sloth-javascript.git
-cd sloth-javascript
-npm install
-npx cypress open
-```
+This project was created to demonstrate how to design and implement a production-quality UI automation framework with the following goals:
 
-If you already have the code, just run:
+• Maintainable test architecture
+• Clear separation between test logic and UI interactions
+• Environment configuration support
+• Reusable components and commands
+• CI/CD pipeline compatibility
 
-```bash
-npm install
-npx cypress open
-```
+The framework validates several public Tangerine pages including:
 
----
+Homepage
 
-## 🔧 Prerequisites
+Sign-in page
 
-- Node.js (v14+)
-- npm or yarn
-- Git
+Registration page
 
----
+The focus of this repository is framework design and test engineering practices, rather than full application coverage.
 
-## 🧱 Project Layout
+🧰 Technology Stack
+Tool	Purpose
+Cypress	End-to-end browser automation
+TypeScript	Type safety and maintainable code
+Node.js	Runtime environment
+npm	Dependency management
+Page Object Model	Maintainable UI abstraction
 
-```
-├─ cypress.config.ts          # Cypress configuration (baseUrl + env overrides)
-├─ package.json               # scripts + dependencies
-├─ tsconfig.json              # TypeScript settings
+Optional integrations supported:
+
+CI/CD pipelines
+
+Test reporting tools
+
+Parallel execution
+
+🏗 Framework Architecture
+
+The framework follows several industry-standard automation design principles.
+
+Page Object Model (POM)
+
+UI interactions are encapsulated in page objects, separating test intent from UI implementation.
+
+Benefits:
+
+Reduced code duplication
+
+Easier maintenance
+
+Clear test readability
+
+Example test flow:
+
+Test Spec → Page Object → Cypress Commands → Browser
+Separation of Responsibilities
+Layer	Responsibility
+Test Specs	Define behavior and assertions
+Page Objects	Encapsulate UI interactions
+Custom Commands	Provide reusable actions
+Config Layer	Environment configuration
+Environment Flexibility
+
+The framework supports multiple environments via environment variables.
+
+Example:
+
+BASE_URL=https://www.tangerine.ca/en/personal
+
+Tests can run against:
+
+Production
+
+Staging
+
+QA environments
+
+without code changes.
+
+📁 Project Structure
+├─ cypress.config.ts          # Cypress configuration
+├─ package.json               # dependencies + scripts
+├─ tsconfig.json              # TypeScript configuration
+│
 ├─ cypress/
-│  ├─ integration/            # test specs
-│  │  ├─ homepage.spec.ts     # homepage tests
-│  │  ├─ login.spec.ts        # login page tests
-│  │  └─ register.spec.ts     # registration page tests
+│  ├─ integration/            # test specifications
+│  │  ├─ homepage.spec.ts
+│  │  ├─ login.spec.ts
+│  │  └─ register.spec.ts
+│  │
 │  └─ support/
 │     ├─ index.ts             # global setup
-│     └─ commands.ts          # custom commands
+│     └─ commands.ts          # custom Cypress commands
+│
 └─ src/
-   ├─ config.ts               # env helpers + test creds
-   └─ pages/                  # page objects
-      ├─ AmazonHomePage.ts    # homepage interactions
-      ├─ AmazonLoginPage.ts   # login page interactions
-      └─ AmazonRegisterPage.ts # registration page interactions
-```
+   ├─ config.ts               # environment helpers
+   │
+   └─ pages/                  # page object classes
+      ├─ HomePage.ts
+      ├─ LoginPage.ts
+      └─ RegisterPage.ts
+🚀 Quick Start
 
----
+Clone the repository:
 
-## 🌍 Environment Configuration
+git clone https://github.com/your-username/sloth-javascript.git
+cd sloth-javascript
 
-### Base URL (overrideable)
-The base URL is set in `cypress.config.ts` and can be overridden via the `BASE_URL` environment variable:
+Install dependencies:
 
-```bash
-BASE_URL=https://www.amazon.com npx cypress run
-```
+npm install
 
-This allows running tests against different environments (e.g., staging).
+Launch Cypress interactive runner:
 
-### Config helper
-`src/config.ts` provides utilities:
+npx cypress open
+▶ Running Tests
+Run in interactive mode
+npx cypress open
+Run all tests (headless)
+npx cypress run
+Run a specific spec
+npx cypress run --spec "cypress/integration/homepage.spec.ts"
+Run against a specific environment
+BASE_URL=https://www.tangerine.ca/en/personal npx cypress run
+🧩 Page Object Example
+Homepage
+import { HomePage } from "../../src/pages/HomePage";
 
-- `getBaseUrl()` — returns the current base URL (useful for building full URLs if needed)
-- `testCredentials` — sample test user data
+const home = new HomePage();
+
+home.visit();
+home.searchFor("cypress");
+Login Page
+import { LoginPage } from "../../src/pages/LoginPage";
+
+const login = new LoginPage();
+
+login.login("user@example.com", "password");
+
+Page objects contain selectors and actions, while test files focus on validation and assertions.
+
+🔧 Configuration
+
+The framework provides environment utilities in:
+
+src/config.ts
 
 Example usage:
 
-```ts
 import { getBaseUrl } from "../src/config";
 
-const fullUrl = `${getBaseUrl()}/some-path`;
-```
+const url = `${getBaseUrl()}/some-path`;
 
----
+This allows tests to dynamically adapt to different deployment environments.
 
-## 🧩 Page Objects (Examples)
+🔄 CI/CD Integration
 
-Page objects encapsulate page interactions. Import and use them in your tests:
+This framework is designed to integrate easily with CI pipelines such as:
 
-### Homepage
+GitHub Actions
 
-```ts
-import { AmazonHomePage } from "../../src/pages/AmazonHomePage";
+Jenkins
 
-const home = new AmazonHomePage();
-home.visit();
-home.searchFor("cypress");
-```
+GitLab CI
 
-### Login
+Azure DevOps
 
-```ts
-import { AmazonLoginPage } from "../../src/pages/AmazonLoginPage";
+Example CI command:
 
-const login = new AmazonLoginPage();
-login.login("user@example.com", "password");
-```
+npx cypress run --browser chrome
 
-### Register
+Typical CI workflow:
 
-```ts
-import { AmazonRegisterPage } from "../../src/pages/AmazonRegisterPage";
+Install Dependencies
+       ↓
+Run Cypress Tests
+       ↓
+Generate Reports
+       ↓
+Publish Results
+📊 Test Reporting
 
-const register = new AmazonRegisterPage();
-register.register({
-  name: "Test User",
-  email: "test@example.com",
-  password: "Password123",
-});
-```
+Cypress provides built-in console reporting.
 
----
+Optional integrations include:
 
-## ▶️ Running Tests
+Mochawesome
 
-### Open Cypress UI (interactive)
+Allure Reports
 
-```bash
-npx cypress open
-```
+Cypress Dashboard
 
-### Run all tests (headless)
+Example integration:
 
-```bash
-npx cypress run
-```
+npm install mochawesome
+🧠 Automation Design Notes
 
-### Run a single spec
+Key engineering principles used in this framework:
 
-```bash
-npx cypress run --spec "cypress/integration/homepage.spec.ts"
-```
+Maintainability
 
----
+Selectors and UI logic are isolated in page objects.
 
-## 🧠 Notes
+Readability
 
-- **Test Logic**: Keep page-specific logic in page objects; specs should focus on behavior and assertions.
-- **Custom Commands**: Use `cypress/support/commands.ts` for reusable actions (e.g., global login helpers).
-- **Amazon Changes**: Amazon's UI updates frequently, so selectors may need adjustments. Tests are designed to be resilient but may require updates.
-- **Known Issues**: Some tests (login/register) may fail due to Amazon's dynamic pages or bot detection. The homepage tests are stable.
+Tests describe user behavior, not UI implementation.
 
----
+Reusability
 
-## 💡 Contributing
+Common actions are implemented as custom Cypress commands.
 
-Pull requests welcome! Add new pages, improve selectors, or enhance the framework.
+Scalability
 
----
+The structure supports scaling to hundreds of tests without architectural changes.
 
-## 📄 License
+⚠ Known Limitations
 
-This project is for demonstration purposes only.
+Banking websites often include advanced protections such as:
+
+Bot detection
+
+CAPTCHA
+
+Multi-factor authentication
+
+Because of these mechanisms, some flows (such as full account creation) may not be fully automatable in a public demo environment.
+
+📈 Future Improvements
+
+Potential enhancements:
+
+Parallel execution
+
+Visual regression testing
+
+API test integration
+
+Test reporting dashboards
+
+Docker test execution
+
+GitHub Actions pipeline
+
+👤 Author
+
+Weipeng Zheng
+Senior QA Automation Engineer / SDET
+
+Specializations:
+
+UI Test Automation (Selenium, Cypress, Playwright)
+
+API Testing (Postman, RestAssured)
+
+Performance Testing (JMeter)
+
+CI/CD Automation
+
+Test Framework Architecture
+
+📄 License
+
+This project is provided for demonstration and educational purposes.
