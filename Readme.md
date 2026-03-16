@@ -148,6 +148,50 @@ This project is configured with **GitHub Actions** to run tests automatically on
 
 The workflow file is located at `.github/workflows/ci.yml`.
 
+## Allure Reports Setup for Cypress + TypeScript
+
+1. Install dependencies
+npm install --save-dev @shelex/cypress-allure-plugin allure-commandline
+
+2. Configure Cypress
+
+In cypress.config.ts:
+import { defineConfig } from 'cypress';
+import allureWriter from '@shelex/cypress-allure-plugin/writer';
+export default defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      allureWriter(on, config);
+      return config;
+    },
+    specPattern: 'cypress/e2e/**/*.cy.{js,ts}',
+  },
+  reporter: 'cypress-multi-reporters',
+  reporterOptions: {
+    reporterEnabled: 'spec, @shelex/cypress-allure-plugin',
+    allureReporterOptions: {
+      outputDir: 'allure-results',
+      disableWebdriverStepsReporting: false,
+      disableWebdriverScreenshotsReporting: false,
+    },
+  },
+});
+
+In cypress/support/e2e.ts:
+import '@shelex/cypress-allure-plugin';
+
+3. Run tests
+npx cypress run
+Results are saved in allure-results/.
+
+4. Generate & view report
+npx allure generate allure-results --clean -o allure-report
+npx allure open allure-report
+
+5. Optional
+Add labels in tests: cy.allure().feature('Feature Name')
+Use VS Code extension “Allure Test Reports” to view reports in editor.
+
 ## ⚠️ Limitations & Notes
 
 - **Bot Protection**: Banking sites often employ CAPTCHA and anti-bot measures. Some end-to-end flows (like full registration) may be restricted in a public automation environment.

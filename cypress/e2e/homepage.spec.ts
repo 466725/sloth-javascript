@@ -6,11 +6,15 @@ describe("Tangerine Homepage", () => {
   const home = new TangerineHomePage();
 
   it("should load the homepage and show the logo", () => {
+    cy.allure().feature('Homepage');
+    cy.allure().story('Validate homepage loads correctly');
     home.visit();
     home.getLogo().should("be.visible");
   });
 
   it("should display 'Get Our App' links", () => {
+    cy.allure().feature('Homepage');
+    cy.allure().story('Validate app download links are visible');
     home.visit();
     // Scroll to the bottom of the page
     cy.scrollTo('bottom');
@@ -20,6 +24,8 @@ describe("Tangerine Homepage", () => {
   });
 
   it("should capture analytics events", () => {
+    cy.allure().feature('Homepage');
+    cy.allure().story('Validate analytics events are sent on homepage load');
     const analyticsEvents: any[] = [];
     cy.intercept('POST', '**google-analytics.com/g/collect', (req) => {
       analyticsEvents.push(req.body);

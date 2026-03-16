@@ -15,6 +15,8 @@ describe("Tangerine Login Page", () => {
   });
 
   it("Logging in input should be displayed", () => {
+    cy.allure().feature('Login');
+    cy.allure().story('Validate login page displays input fields');
     login.login(
       testCredentials.invalidUser.clientId,
       testCredentials.invalidUser.pin

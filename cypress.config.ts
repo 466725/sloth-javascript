@@ -1,4 +1,6 @@
 import { defineConfig } from "cypress";
+import allureWriter from '@shelex/cypress-allure-plugin/writer';
+import { config } from "chai";
 const baseUrl = process.env.BASE_URL || "https://www.tangerine.ca/en/personal";
 export default defineConfig({
   // -------------------------
@@ -29,12 +31,24 @@ export default defineConfig({
   // -------------------------
   e2e: {
     baseUrl,
-    specPattern: "cypress/integration/**/*.spec.ts",
     supportFile: "cypress/support/index.ts",
+    specPattern: 'cypress/e2e/**/*.ts',
     setupNodeEvents(on, config) {
-      // Node event listeners can be implemented here
-      // Example: reporting plugins, logging, etc.
+      allureWriter(on, config); 
       return config;
-    }
+    },
+  },
+
+  // -------------------------
+  // Reporter Settings
+  // -------------------------
+  reporter: 'cypress-multi-reporters', // optional, if you want multiple reporters
+  reporterOptions: {
+    reporterEnabled: 'spec, @shelex/cypress-allure-plugin',
+    allureReporterOptions: {
+      outputDir: 'allure-results',
+      disableWebdriverStepsReporting: false,
+      disableWebdriverScreenshotsReporting: false,
+    },
   }
 });

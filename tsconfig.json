@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": ["cypress", "@shelex/cypress-allure-plugin"],
     "target": "ES2021",
     "lib": [
       "ES2021",
