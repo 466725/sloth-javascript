@@ -5,7 +5,7 @@
 	<extensions>
 		<extension>
 			<format>html</format>
-			<pattern>./allure-results</pattern>
+			<pattern>./allure-report</pattern>
 		</extension>
 	</extensions>
 </configuration>

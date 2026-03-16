@@ -33,3 +33,6 @@ Thumbs.db
 # Logs
 logs
 *.log
+
+# Allure results
+allure-report/
