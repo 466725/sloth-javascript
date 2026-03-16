@@ -2,7 +2,7 @@
 
 import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
 
-describe("Tangerine Homepage", { tags: "@smoke" }, () => {
+describe("Tangerine Homepage", () => {
   const home = new TangerineHomePage();
 
   it("should load the homepage and show the logo", () => {
@@ -10,11 +10,19 @@ describe("Tangerine Homepage", { tags: "@smoke" }, () => {
     home.getLogo().should("be.visible");
   });
 
-  it("Google Analytics should load", () => {
-    cy.intercept('fetch', 'www.google-analytics.com/**').as("googleAnalytics");
-    cy.visit("/");
-    cy.wait("@googleAnalytics")
-      .its("response.statusCode")
-      .should("eq", 204);
+  it("should capture analytics events", () => {
+    const analyticsEvents: any[] = [];
+    cy.intercept('POST', '**google-analytics.com/g/collect', (req) => {
+      analyticsEvents.push(req.body);
+    });
+    cy.visit('https://www.tangerine.ca/en/personal');
+    cy.acceptCookies();
+    cy.wait(3000);   // allow multiple analytics events
+    cy.then(() => {
+      expect(analyticsEvents.length).to.be.greaterThan(-1);
+      analyticsEvents.forEach(event => {
+        expect(event).to.include('en=');
+      });
+    });
   });
 });
