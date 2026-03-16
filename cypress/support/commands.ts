@@ -4,9 +4,14 @@
  */
 Cypress.Commands.add("acceptCookies", () => {
   cy.get("body").then(($body) => {
-    const $button = $body.find("#onetrust-accept-btn-handler:visible");
-    if ($button.length) {
-      cy.wrap($button).click();
+    if ($body.find('#onetrust-accept-btn-handler').length > 0) {
+      cy.get('#onetrust-accept-btn-handler').click();
     }
   });
+});
+
+Cypress.Commands.add("login", (email: string, password: string) => {
+  cy.get("#email").type(email);
+  cy.get("#password").type(password);
+  cy.contains("Log In").click();
 });

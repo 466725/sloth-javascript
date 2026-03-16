@@ -47,7 +47,7 @@ sloth-javascript/
 │   └── workflows/
 │       └── ci.yml             # GitHub Actions pipeline definition
 ├── cypress/
-│   ├── integration/           # Test specifications (e.g., login.spec.ts)
+│   ├── e2e/           # Test specifications (e.g., login.sy.ts)
 │   ├── support/               # Global commands and configuration
 │   └── tsconfig.json          # Cypress-specific TS config
 ├── src/
@@ -96,7 +96,7 @@ npx cypress run
 ### Specific Options
 **Run a specific spec file:**
 ```bash
-npx cypress run --spec "cypress/integration/homepage.spec.ts"
+npx cypress run --spec "cypress/e2e/homepage.cy.ts"
 ```
 
 **Run against a specific environment:**
@@ -124,7 +124,7 @@ export class TangerineHomePage {
 }
 ```
 
-### Test Spec (`cypress/integration/homepage.spec.ts`)
+### Test Spec (`cypress/e2e/homepage.cy.ts`)
 Focuses on business logic and assertions.
 ```typescript
 import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
@@ -164,7 +164,7 @@ export default defineConfig({
       allureWriter(on, config);
       return config;
     },
-    specPattern: 'cypress/e2e/**/*.cy.{js,ts}',
+    specPattern: 'cypress/e2e/**/*.cy.ts',
   },
   reporter: 'cypress-multi-reporters',
   reporterOptions: {
