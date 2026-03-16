@@ -3,6 +3,7 @@
 export class TangerineHomePage {
   visit() {
     cy.visit("/");
+    cy.get('#onetrust-accept-btn-handler').should("be.visible").click();
   }
 
   getLogo() {
