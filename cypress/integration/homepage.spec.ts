@@ -9,4 +9,12 @@ describe("Tangerine Homepage", { tags: "@smoke" }, () => {
     home.visit();
     home.getLogo().should("be.visible");
   });
+
+  it("Google Analytics should load", () => {
+    cy.intercept('fetch', 'www.google-analytics.com/**').as("googleAnalytics");
+    cy.visit("/");
+    cy.wait("@googleAnalytics")
+      .its("response.statusCode")
+      .should("eq", 204);
+  });
 });
