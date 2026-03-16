@@ -8,7 +8,7 @@ export const testCredentials = {
     pin: "123456",
   },
   invalidUser: {
-    clientId: "00000000",
-    pin: "000000",
+    clientId: "87654321",
+    pin: "654321",
   },
 };
