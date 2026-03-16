@@ -31,3 +31,10 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        if: always() # Always upload reports, even if tests fail
+        with:
+          name: cypress-test-report
+          path: cypress/reports

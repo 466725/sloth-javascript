@@ -2,8 +2,8 @@
 
 export class TangerineHomePage {
   visit() {
-    cy.visit("/");
-    cy.get('#onetrust-accept-btn-handler').should("be.visible").click();
+    cy.visit("/"); // Navigate to the base URL
+    cy.acceptCookies(); // Handle the cookie banner using our custom command
   }
 
   getLogo() {
