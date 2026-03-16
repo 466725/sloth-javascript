@@ -1,10 +1,12 @@
-/// <reference types="cypress" />
-
-Cypress.Commands.add("login", (email: string, password: string) => {
-  cy.visit("/");
-  cy.get("#nav-link-accountList").should("be.visible").click();
-  cy.get("#ap_email").should("be.visible").type(email);
-  cy.get("#continue").click();
-  cy.get("#ap_password").should("be.visible").type(password, { log: false });
-  cy.get("#signInSubmit").click();
+/**
+ * A custom command to conditionally find and click the OneTrust cookie banner.
+ * This prevents tests from failing if the banner doesn't appear.
+ */
+Cypress.Commands.add("acceptCookies", () => {
+  cy.get("body").then(($body) => {
+    const $button = $body.find("#onetrust-accept-btn-handler:visible");
+    if ($button.length) {
+      cy.wrap($button).click();
+    }
+  });
 });
