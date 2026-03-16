@@ -1,271 +1,165 @@
-Tangerine Bank UI Test Automation Framework
+# Tangerine Bank UI Test Automation Framework
 
-Cypress + TypeScript | Page Object Model | CI/CD Ready
+![Cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![CI Status](https://github.com/your-username/sloth-javascript/actions/workflows/ci.yml/badge.svg)
 
-A maintainable, scalable UI test automation framework built using Cypress and TypeScript to validate key customer-facing pages of the Tangerine Bank website.
+A professional, scalable **UI test automation framework** built with **Cypress** and **TypeScript**. Designed to validate critical customer-facing flows on the Tangerine Bank website using the **Page Object Model (POM)** design pattern.
 
-This project demonstrates modern test automation architecture and engineering practices used in real-world QA environments.
+---
 
-🎯 Purpose
+## 🎯 Purpose
 
-This project was created to demonstrate how to design and implement a production-quality UI automation framework with the following goals:
+This repository serves as a reference implementation for modern test automation engineering, demonstrating:
 
-• Maintainable test architecture
-• Clear separation between test logic and UI interactions
-• Environment configuration support
-• Reusable components and commands
-• CI/CD pipeline compatibility
+- **Maintainability**: Clear separation of concerns (Test Logic vs. UI Interaction).
+- **Scalability**: Structured to support hundreds of tests and multiple environments.
+- **Type Safety**: Leveraging TypeScript for compile-time checks and better IDE autocompletion.
+- **CI/CD Readiness**: Integrated with GitHub Actions for automated regression testing.
 
-The framework validates several public Tangerine pages including:
+## 🧰 Tech Stack
 
-Homepage
+| Tool | Usage |
+|------|-------|
+| **Cypress** | End-to-End test runner and assertion library |
+| **TypeScript** | Static typing for robust and readable code |
+| **Node.js** | Runtime environment |
+| **GitHub Actions** | CI/CD pipeline for automated execution |
 
-Sign-in page
+## 🏗 Architecture
 
-Registration page
+The framework adheres to the **Page Object Model (POM)** to decouple test scripts from page details.
 
-The focus of this repository is framework design and test engineering practices, rather than full application coverage.
+**Workflow:**
+`Spec File` (Business Logic) ➡️ `Page Object` (Selectors & Actions) ➡️ `Cypress Commands` ➡️ `Browser`
 
-🧰 Technology Stack
-Tool	Purpose
-Cypress	End-to-end browser automation
-TypeScript	Type safety and maintainable code
-Node.js	Runtime environment
-npm	Dependency management
-Page Object Model	Maintainable UI abstraction
+### Key Benefits
+1.  **Readability**: Tests read like plain English user stories.
+2.  **Reusability**: UI actions are defined once and reused across multiple tests.
+3.  **Resilience**: UI changes only require updates in the Page Object, not the tests.
 
-Optional integrations supported:
+## 📁 Project Structure
 
-CI/CD pipelines
+```text
+sloth-javascript/
+├── .github/
+│   └── workflows/
+│       └── ci.yml             # GitHub Actions pipeline definition
+├── cypress/
+│   ├── integration/           # Test specifications (e.g., login.spec.ts)
+│   ├── support/               # Global commands and configuration
+│   └── tsconfig.json          # Cypress-specific TS config
+├── src/
+│   ├── config.ts              # Environment configuration/credentials
+│   └── pages/                 # Page Object Models
+│       ├── TangerineHomePage.ts
+│       └── TangerineLoginPage.ts
+├── cypress.config.ts          # Main Cypress configuration
+├── package.json               # Dependencies and scripts
+└── tsconfig.json              # Global TypeScript config
+```
 
-Test reporting tools
+## 🚀 Getting Started
 
-Parallel execution
+### Prerequisites
+- **Node.js** (v14 or higher)
+- **npm** (v6 or higher)
 
-🏗 Framework Architecture
+### Installation
 
-The framework follows several industry-standard automation design principles.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/sloth-javascript.git
+    cd sloth-javascript
+    ```
 
-Page Object Model (POM)
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
 
-UI interactions are encapsulated in page objects, separating test intent from UI implementation.
+## ▶️ Running Tests
 
-Benefits:
-
-Reduced code duplication
-
-Easier maintenance
-
-Clear test readability
-
-Example test flow:
-
-Test Spec → Page Object → Cypress Commands → Browser
-Separation of Responsibilities
-Layer	Responsibility
-Test Specs	Define behavior and assertions
-Page Objects	Encapsulate UI interactions
-Custom Commands	Provide reusable actions
-Config Layer	Environment configuration
-Environment Flexibility
-
-The framework supports multiple environments via environment variables.
-
-Example:
-
-BASE_URL=https://www.tangerine.ca/en/personal
-
-Tests can run against:
-
-Production
-
-Staging
-
-QA environments
-
-without code changes.
-
-📁 Project Structure
-├─ cypress.config.ts          # Cypress configuration
-├─ package.json               # dependencies + scripts
-├─ tsconfig.json              # TypeScript configuration
-│
-├─ cypress/
-│  ├─ integration/            # test specifications
-│  │  ├─ homepage.spec.ts
-│  │  ├─ login.spec.ts
-│  │  └─ register.spec.ts
-│  │
-│  └─ support/
-│     ├─ index.ts             # global setup
-│     └─ commands.ts          # custom Cypress commands
-│
-└─ src/
-   ├─ config.ts               # environment helpers
-   │
-   └─ pages/                  # page object classes
-      ├─ HomePage.ts
-      ├─ LoginPage.ts
-      └─ RegisterPage.ts
-🚀 Quick Start
-
-Clone the repository:
-
-git clone https://github.com/your-username/sloth-javascript.git
-cd sloth-javascript
-
-Install dependencies:
-
-npm install
-
-Launch Cypress interactive runner:
-
+### Interactive Mode (Test Runner)
+Opens the Cypress Test Runner for debugging and visual execution.
+```bash
 npx cypress open
-▶ Running Tests
-Run in interactive mode
-npx cypress open
-Run all tests (headless)
+```
+
+### Headless Mode (CI Style)
+Runs all tests in the terminal using the default browser.
+```bash
 npx cypress run
-Run a specific spec
+```
+
+### Specific Options
+**Run a specific spec file:**
+```bash
 npx cypress run --spec "cypress/integration/homepage.spec.ts"
-Run against a specific environment
+```
+
+**Run against a specific environment:**
+```bash
 BASE_URL=https://www.tangerine.ca/en/personal npx cypress run
-🧩 Page Object Example
-Homepage
-import { HomePage } from "../../src/pages/HomePage";
+```
 
-const home = new HomePage();
+## 🧩 Code Examples
 
-home.visit();
-home.searchFor("cypress");
-Login Page
-import { LoginPage } from "../../src/pages/LoginPage";
+### Page Object (`src/pages/TangerineHomePage.ts`)
+Encapsulates selectors and actions.
+```typescript
+export class TangerineHomePage {
+  visit() {
+    cy.visit("/");
+  }
 
-const login = new LoginPage();
+  getLogo() {
+    return cy.get('img[alt="Tangerine"]');
+  }
 
-login.login("user@example.com", "password");
+  clickLogin() {
+    cy.contains(/Log In|Log Me In/i).click();
+  }
+}
+```
 
-Page objects contain selectors and actions, while test files focus on validation and assertions.
+### Test Spec (`cypress/integration/homepage.spec.ts`)
+Focuses on business logic and assertions.
+```typescript
+import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
 
-🔧 Configuration
+describe("Tangerine Homepage", () => {
+  const home = new TangerineHomePage();
 
-The framework provides environment utilities in:
+  it("should load the homepage and show the logo", () => {
+    home.visit();
+    home.getLogo().should("be.visible");
+  });
+});
+```
 
-src/config.ts
+## 🔄 CI/CD Pipeline
 
-Example usage:
+This project is configured with **GitHub Actions** to run tests automatically on:
+- Push to `main` / `master` branches
+- Daily schedule (Midnight UTC)
+- Manual trigger (`workflow_dispatch`)
 
-import { getBaseUrl } from "../src/config";
+The workflow file is located at `.github/workflows/ci.yml`.
 
-const url = `${getBaseUrl()}/some-path`;
+## ⚠️ Limitations & Notes
 
-This allows tests to dynamically adapt to different deployment environments.
+- **Bot Protection**: Banking sites often employ CAPTCHA and anti-bot measures. Some end-to-end flows (like full registration) may be restricted in a public automation environment.
+- **Demo Purpose**: This repository focuses on **framework architecture** rather than 100% test coverage of the Tangerine application.
 
-🔄 CI/CD Integration
+## 👤 Author
 
-This framework is designed to integrate easily with CI pipelines such as:
+**Weipeng Zheng**
+*Senior QA Automation Engineer / SDET*
 
-GitHub Actions
+Specializing in UI Automation (Cypress, Playwright, Selenium) and Test Architecture.
 
-Jenkins
-
-GitLab CI
-
-Azure DevOps
-
-Example CI command:
-
-npx cypress run --browser chrome
-
-Typical CI workflow:
-
-Install Dependencies
-       ↓
-Run Cypress Tests
-       ↓
-Generate Reports
-       ↓
-Publish Results
-📊 Test Reporting
-
-Cypress provides built-in console reporting.
-
-Optional integrations include:
-
-Mochawesome
-
-Allure Reports
-
-Cypress Dashboard
-
-Example integration:
-
-npm install mochawesome
-🧠 Automation Design Notes
-
-Key engineering principles used in this framework:
-
-Maintainability
-
-Selectors and UI logic are isolated in page objects.
-
-Readability
-
-Tests describe user behavior, not UI implementation.
-
-Reusability
-
-Common actions are implemented as custom Cypress commands.
-
-Scalability
-
-The structure supports scaling to hundreds of tests without architectural changes.
-
-⚠ Known Limitations
-
-Banking websites often include advanced protections such as:
-
-Bot detection
-
-CAPTCHA
-
-Multi-factor authentication
-
-Because of these mechanisms, some flows (such as full account creation) may not be fully automatable in a public demo environment.
-
-📈 Future Improvements
-
-Potential enhancements:
-
-Parallel execution
-
-Visual regression testing
-
-API test integration
-
-Test reporting dashboards
-
-Docker test execution
-
-GitHub Actions pipeline
-
-👤 Author
-
-Weipeng Zheng
-Senior QA Automation Engineer / SDET
-
-Specializations:
-
-UI Test Automation (Selenium, Cypress, Playwright)
-
-API Testing (Postman, RestAssured)
-
-Performance Testing (JMeter)
-
-CI/CD Automation
-
-Test Framework Architecture
-
-📄 License
+## 📄 License
 
 This project is provided for demonstration and educational purposes.
