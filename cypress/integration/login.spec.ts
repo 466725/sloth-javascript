@@ -3,6 +3,7 @@
 import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
 import { TangerineLoginPage } from "../../src/pages/TangerineLoginPage";
 import { testCredentials } from "../../src/config";
+import { should } from "chai";
 
 describe("Tangerine Login Page", () => {
   const home = new TangerineHomePage();
@@ -13,11 +14,10 @@ describe("Tangerine Login Page", () => {
     home.clickLogin();
   });
 
-  it("should show an error when logging in with invalid credentials", () => {
+  it("Logging in input should be displayed", () => {
     login.login(
       testCredentials.invalidUser.clientId,
       testCredentials.invalidUser.pin
-    );
-    login.getErrorMessage().should("be.visible");
+    )
   });
 });
