@@ -366,7 +366,7 @@ npm test && npm run allure:generate && npm run allure:open
 
 Specializing in UI Automation (Cypress, Playwright, Selenium), Test Architecture, and Framework Design.
 
-**GitHub:** [github.com/YOUR-USERNAME](https://github.com/YOUR-USERNAME)
+**GitHub:** [https://github.com/466725]
 
 ---
 
