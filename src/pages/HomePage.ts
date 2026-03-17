@@ -4,6 +4,7 @@ export class HomePage {
   private readonly homePath = "/";
   private readonly logoSelector = 'img[alt="Tangerine"]';
   private readonly loginTextPattern = /Log In|Log Me In/i;
+  private readonly megaMenuMarker = 'Accounts';
   private readonly iosAppDownload = '#ios-app-store-link';
   private readonly androidAppDownload = '#android-app-store-link';
   private readonly pageBottomSelector = 'bottom';
@@ -22,6 +23,17 @@ export class HomePage {
     // Checks for the app download links for iOS and Android at the bottom of the page
     cy.scrollTo(this.pageBottomSelector);
     return cy.get(this.iosAppDownload).should('be.visible') && cy.get(this.androidAppDownload).should('be.visible');
+  }
+
+  hoverSaveMenu() {
+    cy.contains('a, button, span', 'Save', { matchCase: false })
+      .should('be.visible')
+      .trigger('mouseenter', { force: true })
+      .trigger('mouseover', { force: true });
+  }
+
+  verifyMegaMenuIsVisible() {
+    cy.contains(this.megaMenuMarker).should('be.visible');
   }
 
   clickLogin() {

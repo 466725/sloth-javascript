@@ -19,6 +19,11 @@ describe("Tangerine Homepage", () => {
     home.verifyAppDownloadLinks();
   });
 
+  it("should show dynamic menu when hovering over Save", () => {
+    home.hoverSaveMenu();
+    home.verifyMegaMenuIsVisible();
+  });
+
   it("should capture analytics events", () => {
     const analyticsEvents: any[] = [];
     cy.reload(); // Trigger page load analytics events
