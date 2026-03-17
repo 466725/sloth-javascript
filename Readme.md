@@ -3,178 +3,386 @@
 ![Cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-![CI Status](https://github.com/your-username/sloth-javascript/actions/workflows/ci.yml/badge.svg)
 
-A professional, scalable **UI test automation framework** built with **Cypress** and **TypeScript**. Designed to validate critical customer-facing flows on the Tangerine Bank website using the **Page Object Model (POM)** design pattern.
+A professional, scalable **UI test automation framework** built with **Cypress** and **TypeScript**. This project demonstrates modern test automation best practices for validating critical user-facing flows on the [Tangerine Bank](https://www.tangerine.ca/) website using the **Page Object Model (POM)** design pattern.
+
+> **Note:** This is a demo/reference implementation showcasing framework architecture and automation strategies.
 
 ---
 
 ## 🎯 Purpose
 
-This repository serves as a reference implementation for modern test automation engineering, demonstrating:
+This repository serves as a **reference implementation for enterprise-grade test automation engineering**, demonstrating:
 
-- **Maintainability**: Clear separation of concerns (Test Logic vs. UI Interaction).
-- **Scalability**: Structured to support hundreds of tests and multiple environments.
-- **Type Safety**: Leveraging TypeScript for compile-time checks and better IDE autocompletion.
-- **CI/CD Readiness**: Integrated with GitHub Actions for automated regression testing.
+- **Maintainability**: Clear separation of concerns (Test Logic vs. UI Interaction) using Page Object Model
+- **Scalability**: Structured architecture to support multiple test streams and environments
+- **Type Safety**: Leveraging TypeScript for compile-time checks, self-documenting code, and IDE autocompletion
+- **Reporting**: Integrated Allure Reports for comprehensive test execution insights
+- **Real-World Patterns**: Demonstrates actual patterns used in production SDET teams
 
 ## 🧰 Tech Stack
 
-| Tool | Usage |
-|------|-------|
-| **Cypress** | End-to-End test runner and assertion library |
-| **TypeScript** | Static typing for robust and readable code |
-| **Node.js** | Runtime environment |
-| **GitHub Actions** | CI/CD pipeline for automated execution |
+| Tool | Version | Purpose |
+|------|---------|---------|
+| **Cypress** | ^15.12.0 | End-to-End test runner with built-in debugging |
+| **TypeScript** | ^5.3.0 | Static typing for robust code and better IDE support |
+| **Node.js** | v14+ | JavaScript runtime environment |
+| **Allure Reports** | ^2.38.0 | Comprehensive test reporting and analytics |
 
-## 🏗 Architecture
+## 🏗️ Architecture
 
-The framework adheres to the **Page Object Model (POM)** to decouple test scripts from page details.
+The framework adheres to the **Page Object Model (POM)** pattern, decoupling test logic from page UI interactions.
 
-**Workflow:**
-`Spec File` (Business Logic) ➡️ `Page Object` (Selectors & Actions) ➡️ `Cypress Commands` ➡️ `Browser`
+```
+┌─────────────────────────────────────────────────────────┐
+│  Test Specification (.cy.ts)                            │
+│  "When user logs in, dashboard loads"                   │
+└──────────────┬──────────────────────────────────────────┘
+               │ (imports & uses)
+               ▼
+┌─────────────────────────────────────────────────────────┐
+│  Page Object (TangerineLoginPage.ts)                     │
+│  - CSS Selectors                                         │
+│  - Action Methods (clickLogin, fillUsername, etc.)      │
+└──────────────┬──────────────────────────────────────────┘
+               │ (wraps)
+               ▼
+┌─────────────────────────────────────────────────────────┐
+│  Cypress Commands (cy.click(), cy.type(), etc.)          │
+└──────────────┬──────────────────────────────────────────┘
+               │ (interacts with)
+               ▼
+┌─────────────────────────────────────────────────────────┐
+│  Browser / Application Under Test                        │
+└─────────────────────────────────────────────────────────┘
+```
 
-### Key Benefits
-1.  **Readability**: Tests read like plain English user stories.
-2.  **Reusability**: UI actions are defined once and reused across multiple tests.
-3.  **Resilience**: UI changes only require updates in the Page Object, not the tests.
+### Key Benefits of POM
+
+1. **Readability**: Tests read like business requirements, not technical scripts
+2. **Reusability**: UI interactions defined once, reused across all tests
+3. **Resilience**: UI changes isolated to Page Objects—tests remain stable
+4. **Maintainability**: Clear responsibility boundaries reduce test maintenance burden
 
 ## 📁 Project Structure
 
 ```text
 sloth-javascript/
-├── .github/
-│   └── workflows/
-│       └── ci.yml             # GitHub Actions pipeline definition
 ├── cypress/
-│   ├── e2e/           # Test specifications (e.g., login.sy.ts)
-│   ├── support/               # Global commands and configuration
-│   └── tsconfig.json          # Cypress-specific TS config
+│   ├── e2e/                           # Test specifications
+│   │   ├── homepage.cy.ts             # Homepage tests
+│   │   ├── login.cy.ts                # Login flow tests
+│   │   └── register.cy.ts             # Registration tests
+│   ├── support/                       # Global configuration
+│   │   ├── commands.ts                # Custom Cypress commands
+│   │   └── e2e.ts                     # Test setup/teardown
+│   └── downloads/                     # Downloaded files (test artifacts)
+│
 ├── src/
-│   ├── config.ts              # Environment configuration/credentials
-│   └── pages/                 # Page Object Models
-│       ├── TangerineHomePage.ts
-│       └── TangerineLoginPage.ts
-├── cypress.config.ts          # Main Cypress configuration
-├── package.json               # Dependencies and scripts
-└── tsconfig.json              # Global TypeScript config
+│   ├── config.ts                      # Test credentials & environment config
+│   └── pages/                         # Page Object Models
+│       ├── TangerineHomePage.ts       # Homepage interactions
+│       ├── TangerineLoginPage.ts      # Login page interactions
+│       └── TangerineRegisterPage.ts   # Registration page interactions
+│
+├── allure-report/                     # Generated test reports
+├── cypress.config.ts                  # Cypress configuration
+├── tsconfig.json                      # TypeScript configuration
+├── package.json                       # Dependencies & scripts
+└── README.md                          # This file
 ```
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- **Node.js** (v14 or higher)
-- **npm** (v6 or higher)
+- **Node.js** v14 or higher ([Download](https://nodejs.org/))
+- **npm** v6 or higher (comes with Node.js)
+- Modern browser (Chrome/Edge/Firefox)
 
-### Installation
+### Quick Start
 
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/your-username/sloth-javascript.git
-    cd sloth-javascript
-    ```
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/YOUR-USERNAME/sloth-javascript.git
+   cd sloth-javascript
+   ```
 
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Run tests in interactive mode:**
+   ```bash
+   npm run cypress:open
+   ```
+   This opens the Cypress Test Runner where you can:
+   - Select individual test files to run
+   - Watch tests execute in real-time
+   - Debug with DevTools
+   - View detailed failure messages
+
+### Configuration
+
+**Environment Variables:**
+```bash
+# Run tests against a specific environment
+BASE_URL=https://www.tangerine.ca/en/personal npm test
+```
+
+**Test Credentials:**
+Edit [src/config.ts](src/config.ts) to update test user credentials (currently set to demo values):
+```typescript
+export const testCredentials = {
+  user: {
+    clientId: "12345678",
+    pin: "123456",
+  },
+  invalidUser: {
+    clientId: "87654321", 
+    pin: "654321",
+  },
+};
+```
+
+> ⚠️ **Security Note**: Store sensitive credentials in environment variables (`.env`), not in source code for production setups.
 
 ## ▶️ Running Tests
 
-### Interactive Mode (Test Runner)
-Opens the Cypress Test Runner for debugging and visual execution.
+### Using npm Scripts (Recommended)
+
+**Interactive Mode—open Cypress Test Runner:**
 ```bash
-npx cypress open
+npm run cypress:open
 ```
 
-### Headless Mode (CI Style)
-Runs all tests in the terminal using the default browser.
+**Headless Mode—run all tests in terminal:**
 ```bash
-npx cypress run
+npm test
+# or
+npm run cypress:run
 ```
 
-### Specific Options
-**Run a specific spec file:**
+### Advanced Options
+
+**Run specific test file:**
 ```bash
-npx cypress run --spec "cypress/e2e/homepage.cy.ts"
+npx cypress run --spec "cypress/e2e/login.cy.ts"
 ```
 
-**Run against a specific environment:**
+**Run tests with specific grep tags:**
 ```bash
-BASE_URL=https://www.tangerine.ca/en/personal npx cypress run
+npx cypress run --env grep="@smoke"
 ```
 
-## 🧩 Code Examples
+**Run against different environments:**
+```bash
+BASE_URL=https://staging.tangerine.ca npm test
+```
 
-### Page Object (`src/pages/TangerineHomePage.ts`)
-Encapsulates selectors and actions.
+**Retry failed tests (configured to 2 retries in headless mode):**
+Tests automatically retry on failure in `cypress run` mode—see [cypress.config.ts](cypress.config.ts) for retry settings.
+
+## 💡 Code Examples
+
+### Page Object Example: Login Page
+
+**File:** [src/pages/TangerineLoginPage.ts](src/pages/TangerineLoginPage.ts)
+
+Encapsulates all selectors and interactions for the login page:
 ```typescript
-export class TangerineHomePage {
+export class TangerineLoginPage {
+  private clientIdInput = 'input[data-testid="clientId"]';
+  private pinInput = 'input[data-testid="pin"]';
+  private loginButton = 'button[type="submit"]';
+  private errorMessage = '[role="alert"]';
+
   visit() {
-    cy.visit("/");
+    cy.visit("/login");
   }
 
-  getLogo() {
-    return cy.get('img[alt="Tangerine"]');
+  fillClientId(clientId: string) {
+    cy.get(this.clientIdInput).type(clientId);
+  }
+
+  fillPin(pin: string) {
+    cy.get(this.pinInput).type(pin);
   }
 
   clickLogin() {
-    cy.contains(/Log In|Log Me In/i).click();
+    cy.get(this.loginButton).click();
+  }
+
+  getErrorMessage() {
+    return cy.get(this.errorMessage);
   }
 }
 ```
 
-### Test Spec (`cypress/e2e/homepage.cy.ts`)
-Focuses on business logic and assertions.
+### Test Spec Example: Login Flow
+
+**File:** [cypress/e2e/login.cy.ts](cypress/e2e/login.cy.ts)
+
+Tests business logic using the page object:
 ```typescript
-import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
+import { TangerineLoginPage } from "../../src/pages/TangerineLoginPage";
+import { testCredentials } from "../../src/config";
 
-describe("Tangerine Homepage", () => {
-  const home = new TangerineHomePage();
+describe("Tangerine Login", () => {
+  const login = new TangerineLoginPage();
 
-  it("should load the homepage and show the logo", () => {
-    home.visit();
-    home.getLogo().should("be.visible");
+  beforeEach(() => {
+    login.visit();
+  });
+
+  it("should successfully login with valid credentials", () => {
+    login.fillClientId(testCredentials.user.clientId);
+    login.fillPin(testCredentials.user.pin);
+    login.clickLogin();
+    
+    cy.url().should("include", "/dashboard");
+    cy.contains("Welcome").should("be.visible");
+  });
+
+  it("should show error with invalid credentials", () => {
+    login.fillClientId(testCredentials.invalidUser.clientId);
+    login.fillPin(testCredentials.invalidUser.pin);
+    login.clickLogin();
+    
+    login.getErrorMessage()
+      .should("be.visible")
+      .and("contain", "Invalid credentials");
   });
 });
 ```
 
-## 🔄 CI/CD Pipeline
+## 📋 Test Coverage
 
-This project is configured with **GitHub Actions** to run tests automatically on:
-- Push to `main` / `master` branches
-- Daily schedule (Midnight UTC)
-- Manual trigger (`workflow_dispatch`)
+| Test Suite | Status | Purpose |
+|-----------|--------|---------|
+| [Homepage](cypress/e2e/homepage.cy.ts) | ✅ | Validates homepage loads, logo visible, navigation works |
+| [Login](cypress/e2e/login.cy.ts) | ✅ | Tests valid/invalid login flows, error handling |
+| [Registration](cypress/e2e/register.cy.ts) | ✅ | Validates user registration with form validation |
 
-The workflow file is located at `.github/workflows/ci.yml`.
+## 📊 Allure Test Reports
 
-## Allure Reports Setup for Cypress + TypeScript
+This project includes **Allure Reports** integration for comprehensive test execution analytics.
 
-1. Install dependencies
-npm install --save-dev @shelex/cypress-allure-plugin allure-commandline
+### Generating Reports
 
-2. Configure Cypress
+**After running tests, generate and view the Allure report:**
 
-3. Run tests
-npx cypress run
-Results are saved in allure-results/.
+```bash
+# Generate the report
+npm run allure:generate
 
-4. Generate & view report
-npx allure generate allure-results --clean -o allure-report
-npx allure open allure-report
+# Open the report in browser
+npm run allure:open
+```
 
-## ⚠️ Limitations & Notes
+**Or run tests and generate report in one command:**
+```bash
+npm test && npm run allure:generate && npm run allure:open
+```
 
-- **Bot Protection**: Banking sites often employ CAPTCHA and anti-bot measures. Some end-to-end flows (like full registration) may be restricted in a public automation environment.
-- **Demo Purpose**: This repository focuses on **framework architecture** rather than 100% test coverage of the Tangerine application.
+### What's Included in Reports
+- 📈 Test execution timeline and trends
+- ✅/❌ Pass/fail statistics and breakdown
+- 🔄 Test retry information
+- 📷 Screenshots and logs for failed tests
+- ⏱️ Performance metrics (test duration)
+- 📂 Test categorization (Behaviors, Suites, Severity)
+
+**Report Location:** `allure-report/index.html` (generated locally after running `allure:generate`)
+
+---
+
+## 🔧 Troubleshooting
+
+### Tests won't run
+
+**Issue:** `Command not found: npx`
+- **Solution:** Ensure Node.js and npm are installed: `node --version && npm --version`
+
+**Issue:** Tests timeout or hang
+- **Solution:** Check `cypress.config.ts` timeout settings (currently 10s for commands, 120s for page load)
+- Try increasing values if target site is slow
+
+### Selectors not finding elements
+
+**Common causes:**
+1. Elements changed on target website (Tangerine may update the site)
+2. Dynamic content not fully loaded before assertions
+3. **Solution:** Update selectors in [src/pages/](src/pages/) Page Objects, add waits if needed
+
+### Allure report won't generate
+
+**Issue:** `allure: command not found`
+- **Solution:** Run `npm install` to install allure-commandline dependency
+
+**Issue:** Empty report
+- **Solution:** Ensure tests ran with `npm test` (not just opening in GUI). Check `allure-results/` directory exists with JSON files.
+
+---
+
+## 🔐 Security & Limitations
+
+### Important Notes
+
+⚠️ **CAPTCHA & Bot Protection**: Tangerine Bank employs anti-bot measures (CAPTCHA). Some advanced flows like registration may be restricted in automated testing.
+
+⚠️ **Demo Purpose**: This repository focuses on **framework architecture and pattern demonstration** rather than 100% coverage of Tangerine's actual application.
+
+⚠️ **Test Credentials**: The demo credentials in `src/config.ts` are hardcoded for reference. In production, use environment variables or secure secret management (e.g., GitHub Secrets, HashiCorp Vault).
+
+---
+
+## 📚 Best Practices Demonstrated
+
+- ✅ **Page Object Model (POM)** for maintainable tests
+- ✅ **TypeScript** for type-safe test code
+- ✅ **Separation of Concerns** (tests vs. page interactions vs. config)
+- ✅ **Retry Logic** for flaky test resilience
+- ✅ **Comprehensive Reporting** with Allure
+- ✅ **Custom Commands** in Cypress for reusable actions
+- ✅ **Viewport Configuration** for consistent rendering
+
+---
+
+## 🚦 Roadmap / To-Do
+
+- [ ] CI/CD Pipeline (GitHub Actions)
+- [ ] Cross-browser testing (Firefox, Safari)
+- [ ] Performance baseline testing
+- [ ] Visual regression testing
+- [ ] API mocking for isolated component tests
+
+---
 
 ## 👤 Author
 
-**Weipeng Zheng**
+**Weipeng Zheng**  
 *Senior QA Automation Engineer / SDET*
 
-Specializing in UI Automation (Cypress, Playwright, Selenium) and Test Architecture.
+Specializing in UI Automation (Cypress, Playwright, Selenium), Test Architecture, and Framework Design.
+
+**GitHub:** [github.com/YOUR-USERNAME](https://github.com/YOUR-USERNAME)
+
+---
 
 ## 📄 License
 
-This project is provided for demonstration and educational purposes.
+This project is provided for **demonstration and educational purposes only**. Feel free to use it as a reference for your own test automation frameworks.
+
+---
+
+## ✨ Contributing
+
+Interested in improving this framework? Consider:
+1. Adding new test cases to expand coverage
+2. Implementing additional Page Objects
+3. Optimizing selectors for better stability
+4. Adding visual regression testing
+5. Expanding Allure report customizations
+
+Please submit pull requests with clear descriptions of changes.
