@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 
 export class TangerineLoginPage {
+  private readonly clientIdInputSelector = 'input[id="login-user-id-input"]';
+
   login(clientId: string, pin: string) {
-    return cy.get('input[id="login-user-id-input"]').should("be.visible");
+    return cy.get(this.clientIdInputSelector).should("be.visible");
   }
 }

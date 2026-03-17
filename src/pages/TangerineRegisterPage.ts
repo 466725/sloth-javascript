@@ -1,12 +1,15 @@
 /// <reference types="cypress" />
 
 export class TangerineRegisterPage {
+  private readonly signUpPath = "/en/sign-up";
+  private readonly confirmationHeaderPattern = /Become a Client|Sign Me Up/i;
+
   visit() {
-    cy.visit("/en/sign-up");
+    cy.visit(this.signUpPath);
   }
 
   getConfirmationHeader() {
     // Verifies we are on the "Become a Client" page
-    return cy.contains(/Become a Client|Sign Me Up/i);
+    return cy.contains(this.confirmationHeaderPattern);
   }
 }
