@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-export class TangerineHomePage {
+export class HomePage {
   private readonly homePath = "/";
   private readonly logoSelector = 'img[alt="Tangerine"]';
   private readonly loginTextPattern = /Log In|Log Me In/i;

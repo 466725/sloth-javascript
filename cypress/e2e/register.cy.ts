@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
+import { HomePage } from "../../src/pages/HomePage";
 
 describe("Tangerine Registration", () => {
-  const home = new TangerineHomePage();
+  const home = new HomePage();
 
   it("should verify the Sign Up page loads", () => {
     cy.allure().feature('Registration');

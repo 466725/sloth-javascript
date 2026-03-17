@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-export class TangerineLoginPage {
+export class LoginPage {
   private readonly clientIdInputSelector = 'input[id="login-user-id-input"]';
 
   login(clientId: string, pin: string) {

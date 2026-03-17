@@ -1,12 +1,12 @@
 /// <reference types="cypress" />
 
-import { TangerineHomePage } from "../../src/pages/TangerineHomePage";
-import { TangerineLoginPage } from "../../src/pages/TangerineLoginPage";
+import { HomePage } from "../../src/pages/HomePage";
+import { LoginPage } from "../../src/pages/LoginPage";
 import { testCredentials } from "../../src/config";
 
 describe("Tangerine Login Page", () => {
-  const home = new TangerineHomePage();
-  const login = new TangerineLoginPage();
+  const home = new HomePage();
+  const login = new LoginPage();
 
   beforeEach(() => {
     home.visit();
