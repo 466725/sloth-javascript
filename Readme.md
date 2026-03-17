@@ -85,7 +85,7 @@ sloth-javascript/
 │       ├── TangerineLoginPage.ts      # Login page interactions
 │       └── TangerineRegisterPage.ts   # Registration page interactions
 │
-├── allure-report/                     # Generated test reports
+├── cypress/allure-report/             # Generated test reports
 ├── cypress.config.ts                  # Cypress configuration
 ├── tsconfig.json                      # TypeScript configuration
 ├── package.json                       # Dependencies & scripts
@@ -280,6 +280,13 @@ npm run allure:generate
 npm run allure:open
 ```
 
+**Direct CLI equivalents:**
+
+```bash
+npx allure generate cypress/allure-results --clean -o cypress/allure-report
+npx allure open cypress/allure-report
+```
+
 **Or run tests and generate report in one command:**
 ```bash
 npm test && npm run allure:generate && npm run allure:open
@@ -293,7 +300,7 @@ npm test && npm run allure:generate && npm run allure:open
 - ⏱️ Performance metrics (test duration)
 - 📂 Test categorization (Behaviors, Suites, Severity)
 
-**Report Location:** `allure-report/index.html` (generated locally after running `allure:generate`)
+**Report Location:** `cypress/allure-report/index.html` (generated locally after running `allure:generate`)
 
 ---
 
@@ -321,7 +328,7 @@ npm test && npm run allure:generate && npm run allure:open
 - **Solution:** Run `npm install` to install allure-commandline dependency
 
 **Issue:** Empty report
-- **Solution:** Ensure tests ran with `npm test` (not just opening in GUI). Check `allure-results/` directory exists with JSON files.
+- **Solution:** Ensure tests ran with `npm test` (not just opening in GUI). Check `cypress/allure-results/` directory exists with JSON files.
 
 ---
 

@@ -6,8 +6,8 @@
     "cypress:open": "npx cypress open",
     "cypress:run": "npx cypress run",
     "test": "npm run cypress:run",
-    "allure:generate": "allure generate allure-results --clean -o allure-report",
-    "allure:open": "allure open allure-report"
+    "allure:generate": "allure generate cypress/allure-results --clean -o cypress/allure-report",
+    "allure:open": "allure open cypress/allure-report"
   },
   "devDependencies": {
     "@bahmutov/cy-grep": "^3.0.0",

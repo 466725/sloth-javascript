@@ -36,3 +36,6 @@ logs
 
 # Allure results
 allure-report/
+allure-results/
+cypress/allure-report/
+cypress/allure-results/

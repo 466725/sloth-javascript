@@ -18,7 +18,9 @@ export default defineConfig({
   },
 
   env: {
-    environment: "prod"
+    environment: "prod",
+    allure: true,
+    allureResultsPath: "cypress/allure-results"
   },
 
   e2e: {
