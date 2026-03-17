@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-export class TangerineRegisterPage {
+export class RegisterPage {
   private readonly signUpPath = "/en/sign-up";
   private readonly confirmationHeaderPattern = /Become a Client|Sign Me Up/i;
 
