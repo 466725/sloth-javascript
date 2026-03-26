@@ -1,40 +1,70 @@
-name: End-to-End Tests
+name: CI
 
 on:
-  # Trigger when a PR is merged (pushed) to main or master
   push:
-    branches:
-      - main
-      - master
-  # Trigger nightly at midnight UTC
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
   schedule:
-    - cron: '0 0 * * *'
-  # Allow manual triggering from the GitHub Actions tab
+    # Nightly run at midnight UTC
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
   cypress-run:
+    name: Cypress E2E Tests (${{ matrix.browser }})
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chrome]
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Install npm dependencies and run Cypress tests
-      - name: Cypress run
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         with:
-          browser: chrome
+          browser: ${{ matrix.browser }}
+          install: false
+        env:
+          BASE_URL: ${{ secrets.BASE_URL || 'https://www.tangerine.ca/en/personal' }}
 
-      - name: Upload Screenshots
+      - name: Generate Allure report
+        if: always()
+        run: npm run allure:generate
+
+      - name: Upload Allure results
+        if: always()
         uses: actions/upload-artifact@v4
+        with:
+          name: allure-results-${{ matrix.browser }}
+          path: cypress/allure-results
+          retention-days: 14
+
+      - name: Upload Allure report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ matrix.browser }}
+          path: cypress/allure-report
+          retention-days: 14
+
+      - name: Upload screenshots on failure
         if: failure()
-        with:
-          name: cypress-screenshots
-          path: cypress/screenshots
-
-      - name: Upload Test Report
         uses: actions/upload-artifact@v4
-        if: always() # Always upload reports, even if tests fail
         with:
-          name: cypress-test-report
-          path: cypress/reports
+          name: cypress-screenshots-${{ matrix.browser }}
+          path: cypress/screenshots
+          retention-days: 7

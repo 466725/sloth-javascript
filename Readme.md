@@ -1,5 +1,7 @@
 # Tangerine Bank UI Test Automation Framework
 
+[![CI](https://github.com/466725/sloth-javascript/actions/workflows/ci.yml/badge.svg)](https://github.com/466725/sloth-javascript/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 ![Cypress](https://img.shields.io/badge/-cypress-%23E5E5E5?style=for-the-badge&logo=cypress&logoColor=058a5e)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -373,23 +375,28 @@ npm test && npm run allure:generate && npm run allure:open
 
 Specializing in UI Automation (Cypress, Playwright, Selenium), Test Architecture, and Framework Design.
 
-**GitHub:** [https://github.com/466725]
+**GitHub:** [github.com/466725](https://github.com/466725)
 
 ---
 
 ## 📄 License
 
-This project is provided for **demonstration and educational purposes only**. Feel free to use it as a reference for your own test automation frameworks.
+This project is licensed under the [MIT License](LICENSE). Feel free to use it as a reference for your own test automation frameworks.
 
 ---
 
 ## ✨ Contributing
 
-Interested in improving this framework? Consider:
-1. Adding new test cases to expand coverage
-2. Implementing additional Page Objects
-3. Optimizing selectors for better stability
-4. Adding visual regression testing
-5. Expanding Allure report customizations
+Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
+- Opening issues and feature requests
+- Branching and commit message conventions
+- Adding new tests and page objects
+- Submitting pull requests
 
-Please submit pull requests with clear descriptions of changes.
+Please also review our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+---
+
+## 🔒 Security
+
+See [SECURITY.md](SECURITY.md) for how to report vulnerabilities and security best practices for this project.

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://github.com/466725/sloth-javascript#readme
+    about: Read the project README for setup and usage instructions.
+  - name: Cypress Documentation
+    url: https://docs.cypress.io
+    about: Official Cypress documentation for general Cypress questions.

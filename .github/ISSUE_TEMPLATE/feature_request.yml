@@ -1,0 +1,65 @@
+---
+name: Feature Request
+description: Suggest a new test, page object, or framework enhancement
+title: "[Feature]: "
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement! Please describe your idea clearly.
+
+  - type: checkboxes
+    id: existing-issues
+    attributes:
+      label: Pre-flight checklist
+      options:
+        - label: I have searched existing issues and this feature has not been requested before
+          required: true
+
+  - type: dropdown
+    id: feature-area
+    attributes:
+      label: Area
+      description: Which part of the framework would this enhance?
+      options:
+        - New test coverage (cypress/e2e/)
+        - New Page Object (src/pages/)
+        - Framework configuration
+        - CI/CD pipeline
+        - Reporting
+        - Documentation
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem does this feature solve? What is currently missing?
+      placeholder: "As a tester, I want to... so that..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Describe the implementation you would like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any alternative approaches you considered?
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other information, mockups, or references.
