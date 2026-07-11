@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { HomePage } from "../../src/pages/HomePage";
+import { HomePage } from "../../src/cypress_tests/HomePage";
 
 describe("Tangerine Homepage", () => {
   const home = new HomePage();
