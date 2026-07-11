@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { HomePage } from "../../src/pages/HomePage";
-import { LoginPage } from "../../src/pages/LoginPage";
+import { HomePage } from "../../src/cypress_tests/HomePage";
+import { LoginPage } from "../../src/cypress_tests/LoginPage";
 import { testCredentials } from "../../src/config";
 
 describe("Tangerine Login Page", () => {
