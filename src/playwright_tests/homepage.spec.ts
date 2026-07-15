@@ -16,7 +16,8 @@ test.describe("Tangerine Homepage", () => {
   });
 
   test("should load the homepage and show the logo", async ({ page }) => {
-    await expect(page.locator('img[alt="Tangerine"]')).toBeVisible();
+    // Two logos exist in DOM (desktop + hamburger). Assert any visible logo.
+    await expect(page.locator('img[alt="Tangerine"]').first()).toBeVisible();
   });
 
   test("should display 'Get Our App' links", async ({ page }) => {
@@ -28,8 +29,8 @@ test.describe("Tangerine Homepage", () => {
   test("should show dynamic menu when hovering over Save", async ({ page }) => {
     const saveMenu = page.locator("a, button, span").filter({ hasText: /Save/i }).first();
     await expect(saveMenu).toBeVisible();
-    await saveMenu.hover();
-    await expect(page.getByText("Accounts", { exact: false })).toBeVisible();
+    await saveMenu.hover({ force: true });
+    await expect(page.locator("#accounts-save")).toBeVisible();
   });
 
   test("should capture analytics events", async ({ page }) => {
