@@ -36,12 +36,15 @@ test('mouse actions demo', async ({ page }) => {
 		</script>
 	`);
 
+	// Left click action
 	await page.locator('#mouse-btn').click();
 	await expect(page.locator('#left-count')).toHaveText('Left: 1');
 
+	// Right click action
 	await page.locator('#mouse-btn').click({ button: 'right' });
 	await expect(page.locator('#right-count')).toHaveText('Right: 1');
 
+	// Double click action
 	await page.locator('#mouse-btn').dblclick();
 	await expect(page.locator('#double-count')).toHaveText('Double: 1');
 });
@@ -52,10 +55,15 @@ test('keyboard actions demo', async ({ page }) => {
 	`);
 
 	const input = page.locator('#name');
+	// Focus the input field
 	await input.click();
+	// Type characters one by one
 	await input.pressSequentially('playwright');
+	// Select all text
 	await input.press('Control+A');
+	// Delete selected text
 	await input.press('Backspace');
+	// Type final value
 	await input.type('keyboard done');
 
 	await expect(input).toHaveValue('keyboard done');
