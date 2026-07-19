@@ -105,7 +105,7 @@ npm run cypress:open
 npx cypress run --spec "cypress/e2e/login.cy.ts"
 ```
 
-## Running Playwright Specs
+## Running And Debugging Playwright Specs
 
 Playwright is installed in the root dev dependencies. There are currently no dedicated root npm scripts for Playwright, so run it directly with `npx`.
 
@@ -125,6 +125,18 @@ Run one Playwright spec:
 
 ```bash
 npx playwright test src/playwright_tests/login.spec.ts
+```
+
+Debug one TypeScript Playwright spec in Inspector (slow-motion step-through):
+
+```powershell
+$env:PWDEBUG="1"; npx playwright test src/playwright_tests/login.spec.ts
+```
+
+Debug all TypeScript Playwright specs:
+
+```powershell
+$env:PWDEBUG="1"; npx playwright test src/playwright_tests/*.spec.ts
 ```
 
 ## Current Test Coverage
