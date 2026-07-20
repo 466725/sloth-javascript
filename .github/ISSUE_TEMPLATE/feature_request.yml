@@ -25,8 +25,8 @@ body:
       label: Area
       description: Which part of the framework would this enhance?
       options:
-        - New test coverage (cypress/e2e/)
-        - New Page Object (src/pages/)
+        - New test coverage (cypress/tests/)
+        - New Page Object (cypress/support/pages/)
         - Framework configuration
         - CI/CD pipeline
         - Reporting
