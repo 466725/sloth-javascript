@@ -39,3 +39,7 @@ allure-report/
 allure-results/
 cypress/allure-report/
 cypress/allure-results/
+
+# Queries subproject generated logs
+queries/post-log.json
+queries/pre-log.json
