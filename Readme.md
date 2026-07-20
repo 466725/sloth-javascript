@@ -8,9 +8,9 @@ UI test automation project for https://www.tangerine.ca/ using TypeScript. The p
 ## What Is In This Repository
 
 - Cypress end-to-end tests for homepage, login, and registration flows.
-- POM classes in `src/cypress_tests` used by Cypress tests.
+- POM classes in `cypress/support/pages` used by Cypress tests.
 - Allure integration for local reports and CI artifacts.
-- Playwright specs in `src/playwright_tests`.
+- Playwright specs in `playwright/tests`.
 - A standalone `queries` package for SQLite-related utilities.
 
 ## Tech Stack
@@ -29,16 +29,19 @@ sloth-javascript/
 |-- cypress/
 |   |-- e2e/
 |   |-- support/
+|   |   `-- pages/
 |   |-- downloads/
 |   |-- screenshots/
 |   |-- allure-results/   # generated test result files
 |   `-- allure-report/    # generated report output
+|-- playwright/
+|   |-- concepts/
+|   `-- tests/
 |-- src/
 |   |-- config.ts
-|   |-- cypress_tests/
-|   `-- playwright_tests/
 |-- queries/              # separate package with its own package.json
 |-- cypress.config.ts
+|-- playwright.config.ts
 |-- tsconfig.json
 |-- package.json
 `-- Readme.md
@@ -118,25 +121,25 @@ npx playwright install
 Run all Playwright specs in this project:
 
 ```bash
-npx playwright test src/playwright_tests/*.spec.ts
+npx playwright test playwright/tests/*.spec.ts
 ```
 
 Run one Playwright spec:
 
 ```bash
-npx playwright test src/playwright_tests/login.spec.ts
+npx playwright test playwright/tests/login.spec.ts
 ```
 
 Debug one TypeScript Playwright spec in Inspector (slow-motion step-through):
 
 ```powershell
-$env:PWDEBUG="1"; npx playwright test src/playwright_tests/login.spec.ts
+$env:PWDEBUG="1"; npx playwright test playwright/tests/login.spec.ts
 ```
 
 Debug all TypeScript Playwright specs:
 
 ```powershell
-$env:PWDEBUG="1"; npx playwright test src/playwright_tests/*.spec.ts
+$env:PWDEBUG="1"; npx playwright test playwright/tests/*.spec.ts
 ```
 
 ## Current Test Coverage
@@ -157,9 +160,9 @@ $env:PWDEBUG="1"; npx playwright test src/playwright_tests/*.spec.ts
 
 Equivalent checks exist in:
 
-- `src/playwright_tests/homepage.spec.ts`
-- `src/playwright_tests/login.spec.ts`
-- `src/playwright_tests/register.spec.ts`
+- `playwright/tests/homepage.spec.ts`
+- `playwright/tests/login.spec.ts`
+- `playwright/tests/register.spec.ts`
 
 ## Allure Reporting
 

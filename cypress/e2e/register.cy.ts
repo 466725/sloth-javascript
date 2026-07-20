@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { HomePage } from "../../src/cypress_tests/HomePage";
+import { HomePage } from "../support/pages/HomePage";
 
 describe("Tangerine Registration", () => {
   const home = new HomePage();
