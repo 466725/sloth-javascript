@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "types": ["cypress", "@shelex/cypress-allure-plugin"],
     "target": "ES2021",
     "lib": [
       "ES2021",
@@ -14,11 +13,13 @@
     "resolveJsonModule": true,
     "types": [
       "cypress",
+      "@shelex/cypress-allure-plugin",
       "node"
     ],
     "outDir": "dist"
   },
   "include": [
+    "*.config.ts",
     "cypress/**/*.ts",
     "playwright/**/*.ts",
     "src/**/*.ts"
