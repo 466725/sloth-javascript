@@ -29,6 +29,7 @@ sloth-javascript/
 |-- cypress/
 |   |-- e2e/
 |   |-- support/
+|   |   |-- config.ts
 |   |   `-- pages/
 |   |-- downloads/
 |   |-- screenshots/
@@ -37,8 +38,6 @@ sloth-javascript/
 |-- playwright/
 |   |-- concepts/
 |   `-- tests/
-|-- src/
-|   |-- config.ts
 |-- queries/              # separate package with its own package.json
 |-- cypress.config.ts
 |-- playwright.config.ts
@@ -78,7 +77,7 @@ BASE_URL="https://www.tangerine.ca/en/personal" npm test
 
 ### Test Credentials
 
-Sample credentials are defined in `src/config.ts` as:
+Sample credentials are defined in `cypress/support/config.ts` as:
 
 - `testCredentials.user`
 - `testCredentials.invalidUser`
