@@ -27,7 +27,7 @@ UI test automation project for https://www.tangerine.ca/ using TypeScript. The p
 ```text
 sloth-javascript/
 |-- cypress/
-|   |-- e2e/
+|   |-- tests/
 |   |-- support/
 |   |   |-- config.ts
 |   |   `-- pages/
@@ -104,7 +104,7 @@ npm test
 npm run cypress:open
 
 # Run a single spec
-npx cypress run --spec "cypress/e2e/login.cy.ts"
+npx cypress run --spec "cypress/tests/login.cy.ts"
 ```
 
 ## Running And Debugging Playwright Specs
@@ -145,14 +145,14 @@ $env:PWDEBUG="1"; npx playwright test playwright/tests/*.spec.ts
 
 ### Cypress
 
-- `cypress/e2e/homepage.cy.ts`
+- `cypress/tests/homepage.cy.ts`
   - homepage/logo visibility
   - app download links visibility
   - hover behavior for Save menu
   - analytics request capture check
-- `cypress/e2e/login.cy.ts`
+- `cypress/tests/login.cy.ts`
   - login flow entry and login input interaction
-- `cypress/e2e/register.cy.ts`
+- `cypress/tests/register.cy.ts`
   - visible Sign Up or Become a Client link check
 
 ### Playwright
