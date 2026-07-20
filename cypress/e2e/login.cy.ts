@@ -2,7 +2,7 @@
 
 import { HomePage } from "../support/pages/HomePage";
 import { LoginPage } from "../support/pages/LoginPage";
-import { testCredentials } from "../../src/config";
+import { testCredentials } from "../support/config";
 
 describe("Tangerine Login Page", () => {
   const home = new HomePage();
