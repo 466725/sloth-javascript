@@ -46,13 +46,61 @@ sloth-javascript/
 `-- Readme.md
 ```
 
-## Setup
+## Setup For A New Machine
 
-Install root dependencies:
+### Prerequisites
+
+Install these tools before running tests:
+
+- Node.js 20 LTS (or newer; minimum supported is Node.js 18)
+- npm 9+
+- Git
+- Java Runtime (required to generate/open Allure HTML reports)
+
+Quick checks:
 
 ```bash
+node -v
+npm -v
+java -version
+```
+
+### 1. Clone And Install
+
+```bash
+git clone https://github.com/466725/sloth-javascript.git
+cd sloth-javascript
 npm install
 ```
+
+### 2. Install Playwright Browsers (One Time)
+
+```bash
+npx playwright install
+```
+
+If your machine is Linux and Playwright reports missing OS libraries:
+
+```bash
+npx playwright install --with-deps
+```
+
+### 3. Optional: Install Queries Subproject Dependencies
+
+Only needed if you plan to run anything in `queries/`.
+
+```bash
+npm --prefix queries install
+```
+
+### 4. Verify Setup With A Fast Smoke Run
+
+```bash
+npx cypress run --spec "cypress/tests/login.cy.ts"
+npx playwright test playwright/tests/login.spec.ts
+```
+
+If both commands pass, your machine is ready.
 
 ## Configuration
 
@@ -84,6 +132,22 @@ Sample credentials are defined in `cypress/support/config.ts` as:
 
 Do not use real secrets in source code for production-like environments.
 
+### Optional Environment Variable
+
+You can override the default base URL for both Cypress and Playwright with `BASE_URL`.
+
+PowerShell:
+
+```powershell
+$env:BASE_URL="https://www.tangerine.ca/en/personal"
+```
+
+bash:
+
+```bash
+export BASE_URL="https://www.tangerine.ca/en/personal"
+```
+
 ## Running Cypress Tests
 
 ### NPM Scripts (root package)
@@ -105,6 +169,13 @@ npm run cypress:open
 
 # Run a single spec
 npx cypress run --spec "cypress/tests/login.cy.ts"
+```
+
+Generate and open Cypress Allure report:
+
+```bash
+npm run allure:generate
+npm run allure:open
 ```
 
 ## Running And Debugging Playwright Specs
@@ -146,6 +217,13 @@ Debug all TypeScript Playwright specs:
 
 ```powershell
 $env:PWDEBUG="1"; npx playwright test playwright/tests/*.spec.ts
+```
+
+Generate and open Playwright Allure report:
+
+```bash
+npm run playwright:allure:generate
+npm run playwright:allure:open
 ```
 
 ## Current Test Coverage
@@ -196,6 +274,18 @@ Playwright paths used by this project:
 - Results: `playwright/allure-results`
 - Report: `playwright/allure-report`
 - Screenshots/artifacts: `playwright/screenshots`
+
+## Troubleshooting
+
+- `allure: command not found`:
+  - Run `npm install` at project root.
+  - Confirm Java is installed (`java -version`).
+- Playwright fails before tests start:
+  - Run `npx playwright install`.
+  - On Linux, run `npx playwright install --with-deps`.
+- Cypress opens but test fails on first page load:
+  - Confirm internet access to `https://www.tangerine.ca`.
+  - Retry with explicit `BASE_URL` set for your environment.
 
 ## CI Pipeline
 
