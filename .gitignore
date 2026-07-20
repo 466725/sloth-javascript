@@ -40,6 +40,9 @@ allure-results/
 test-results/
 cypress/allure-report/
 cypress/allure-results/
+playwright/allure-report/
+playwright/allure-results/
+playwright/screenshots/
 
 # Queries subproject generated logs
 queries/post-log.json
