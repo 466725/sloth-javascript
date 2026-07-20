@@ -27,8 +27,8 @@ body:
       label: Area
       description: Which part of the framework is affected?
       options:
-        - Test Spec (cypress/e2e/)
-        - Page Object (src/pages/)
+        - Test Spec (cypress/tests/)
+        - Page Object (cypress/support/pages/)
         - Cypress Config (cypress.config.ts)
         - CI Pipeline (.github/workflows/)
         - Allure Report
@@ -41,7 +41,7 @@ body:
     attributes:
       label: Affected test file(s)
       description: Which test file(s) exhibit the bug?
-      placeholder: "e.g. cypress/e2e/login.cy.ts"
+      placeholder: "e.g. cypress/tests/login.cy.ts"
 
   - type: textarea
     id: description
