@@ -109,7 +109,14 @@ npx cypress run --spec "cypress/tests/login.cy.ts"
 
 ## Running And Debugging Playwright Specs
 
-Playwright is installed in the root dev dependencies. There are currently no dedicated root npm scripts for Playwright, so run it directly with `npx`.
+Playwright is installed in root dev dependencies with dedicated npm scripts.
+
+### NPM Scripts (Playwright)
+
+- `npm run playwright:test` - run all Playwright specs.
+- `npm run playwright:debug` - run all Playwright specs in debug mode (Inspector).
+- `npm run playwright:allure:generate` - build Allure report from `playwright/allure-results`.
+- `npm run playwright:allure:open` - open generated Playwright Allure report.
 
 If Playwright browsers are not installed yet:
 
@@ -176,6 +183,19 @@ Paths used by this project:
 
 - Results: `cypress/allure-results`
 - Report: `cypress/allure-report`
+
+After running Playwright tests:
+
+```bash
+npm run playwright:allure:generate
+npm run playwright:allure:open
+```
+
+Playwright paths used by this project:
+
+- Results: `playwright/allure-results`
+- Report: `playwright/allure-report`
+- Screenshots/artifacts: `playwright/screenshots`
 
 ## CI Pipeline
 
