@@ -29,6 +29,10 @@
   "scripts": {
     "cypress:open": "npx cypress open",
     "cypress:run": "npx cypress run",
+    "playwright:test": "npx playwright test playwright/tests/*.spec.ts",
+    "playwright:debug": "npx playwright test playwright/tests/*.spec.ts --debug",
+    "playwright:allure:generate": "allure generate playwright/allure-results --clean -o playwright/allure-report",
+    "playwright:allure:open": "allure open playwright/allure-report",
     "test": "npm run cypress:run",
     "allure:generate": "allure generate cypress/allure-results --clean -o cypress/allure-report",
     "allure:open": "allure open cypress/allure-report"
@@ -39,6 +43,7 @@
     "@shelex/cypress-allure-plugin": "^2.41.2",
     "@types/node": "^26.1.1",
     "allure-commandline": "^2.38.0",
+    "allure-playwright": "^3.10.2",
     "cypress": "^15.12.0",
     "cypress-multi-reporters": "^2.0.5",
     "typescript": "^5.3.0"
