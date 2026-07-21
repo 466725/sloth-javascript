@@ -64,7 +64,7 @@ test('keyboard actions demo', async ({ page }) => {
 	// Delete selected text
 	await input.press('Backspace');
 	// Type final value
-	await input.type('keyboard done');
+	await input.pressSequentially('keyboard done');
 
 	await expect(input).toHaveValue('keyboard done');
 });
